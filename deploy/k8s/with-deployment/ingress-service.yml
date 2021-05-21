@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  labels:
+    app: nodulapp
+    component: ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nodulfront-clusterip
+                port:
+                  number: 7171
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: nodulapi-clusterip
+                port:
+                  number: 6363

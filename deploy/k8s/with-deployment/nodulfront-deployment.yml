@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodulfront-deployment
+  labels:
+    app: nodulapp
+    component: nodulfront
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: nodulfront
+  template:
+    metadata:
+      labels:
+        app: nodulapp
+        component: nodulfront
+    spec:
+      containers:
+        - name: nodulfront
+          image: dnrjpc/nodulfront:1
+          env:
+            - name: NODUL_API_URL
+              value: http://127.0.0.1/api
+          ports:
+            - containerPort: 7474

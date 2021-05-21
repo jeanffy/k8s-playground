@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-clusterip
+  labels:
+    app: nodulapp
+    component: redis
+spec:
+  type: ClusterIP
+  selector:
+    component: redis
+  ports:
+    - port: 6379
+      targetPort: 6379

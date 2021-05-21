@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodulapi-deployment
+  labels:
+    app: nodulapp
+    component: nodulapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: nodulapi
+  template:
+    metadata:
+      labels:
+        app: nodulapp
+        component: nodulapi
+    spec:
+      volumes:
+        - name: file-storage
+          persistentVolumeClaim:
+            claimName: nodulapi-pvc
+      containers:
+        - name: nodulapi
+          image: dnrjpc/nodulapi:1
+          env:
+            - name: NODUL_FOO
+              value: This is a message from k8s
+            - name: NODUL_USE_REDIS
+              value: "1"
+            - name: NODUL_REDIS_HOST
+              value: redis-clusterip
+          ports:
+            - containerPort: 5959
+          volumeMounts:
+            - name: file-storage
+              mountPath: /tmp/nodulapp

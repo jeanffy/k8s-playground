@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodulfront-pod
+  labels:
+    app: nodulapp
+    component: nodulfront
+spec:
+  containers:
+    - name: nodulfront
+      image: dnrjpc/nodulfront:1
+      #imagePullPolicy: Always
+      imagePullPolicy: Never
+      env:
+        - name: NODUL_FRONT_PORT
+          value: "7474"
+        - name: NODUL_API_URL
+          value: http://127.0.0.1:31111
+      ports:
+        - containerPort: 7474

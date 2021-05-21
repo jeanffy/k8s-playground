@@ -1,0 +1,34 @@
+services:
+  nodulapi:
+    build:
+      context: ../../app
+      dockerfile: api.dockerfile
+    container_name: nodulapi
+    ports:
+      - 8585:3000
+    volumes:
+      - ../../data/file:/tmp/nodulapp
+    environment:
+      NODUL_USE_REDIS: 1
+      NODUL_FOO: This is a message from docker compose
+      NODUL_REDIS_HOST: redis
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:6-alpine
+    container_name: redis
+    volumes:
+      - ../../data/redis:/data
+
+  nodulfront:
+    build:
+      context: ../../app
+      dockerfile: front.dockerfile
+    container_name: nodulfront
+    ports:
+      - 8090:4000
+    environment:
+      NODUL_API_URL: http://localhost:8585
+    depends_on:
+      - nodulapi

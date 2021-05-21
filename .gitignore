@@ -1,0 +1,5 @@
+data/file/*
+!data/file/.gitkeep
+data/redis/*
+!data/redis/.gitkeep
+app/node_modules

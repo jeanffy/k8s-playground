@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodulapi-pod
+  labels:
+    app: nodulapp
+    component: nodulapi
+spec:
+  volumes:
+    - name: file-storage
+      emptyDir: {}
+    - name: redis-storage
+      emptyDir: {}
+
+  containers:
+
+    - name: nodulapi
+      image: dnrjpc/nodulapi:1
+      #imagePullPolicy: Always
+      imagePullPolicy: Never
+      env:
+        - name: NODUL_API_PORT
+          value: "5959"
+        - name: NODUL_FOO
+          value: This is a message from k8s
+        - name: NODUL_USE_REDIS
+          value: "1"
+        - name: NODUL_REDIS_HOST
+          value: 127.0.0.1
+      ports:
+        - containerPort: 5959
+      volumeMounts:
+        - name: file-storage
+          mountPath: /tmp/nodulapp
+
+    - name: redis
+      image: redis:6-alpine
+      volumeMounts:
+        - name: redis-storage
+          mountPath: /data
