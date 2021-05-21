@@ -173,9 +173,9 @@ Schéma :
 ![](./deploy/schemas/k8s-deployment.png)
 
 - `kubectl apply -f deploy/k8s/with-deployment`
-- `kubectl get all -l app=nodulapp` pour voir tous les objets créés (sauf les PVC et Ingress)
-- `kubectl get pvc -l app=nodulapp` pour voir les PVC
-- `kubectl get ingresses -l app=nodulapp` pour voir les PVC
+- `kubectl get all -l app.kubernetes.io/name=nodulapp` pour voir tous les objets créés (sauf les PVC et Ingress)
+- `kubectl get pvc -l app.kubernetes.io/name=nodulapp` pour voir les PVC
+- `kubectl get ingresses -l app.kubernetes.io/name=nodulapp` pour voir les PVC
 - si minikube avec driver Docker
   - `minikube service nodulapi-clusterip` (spécifique minikube)
   - le navigateur s'ouvre sur l'URL affichée
@@ -183,7 +183,7 @@ Schéma :
   - `minikube ip`
   - API : http://<minikube-ip>/api
   - Front http://<minikube-ip>
-- `kubectl get pods -l app=nodulapp` pour voir les pods créés
+- `kubectl get pods -l app.kubernetes.io/name=nodulapp` pour voir les pods créés
 - `kubectl logs -f nodulapi-deployment-xxx-yyy` pour voir les logs de l'app Node.js API
 - `kubectl logs -f nodulmongo-deployment-xxx-yyy` pour voir les logs de MongoDB
 - `kubectl logs -f nodulfront-deployment-xxx-yyy` pour voir les logs de l'app Node.js front
@@ -208,9 +208,9 @@ Pour tout supprimer :
 
 - `kubectl delete -f deploy/k8s/with-deployment`
 - ou
-  - `kubectl delete all -l app=nodulapp`
-  - `kubectl delete pvc -l app=nodulapp` (les fichiers crées et les données de MongoDB seront perdues)
-  - `kubectl delete ingress -l app=nodulapp`
+  - `kubectl delete all -l app.kubernetes.io/name=nodulapp`
+  - `kubectl delete pvc -l app.kubernetes.io/name=nodulapp` (les fichiers crées et les données de MongoDB seront perdues)
+  - `kubectl delete ingress -l app.kubernetes.io/name=nodulapp`
 
 Debugger un pod qui ne démarre pas :
 

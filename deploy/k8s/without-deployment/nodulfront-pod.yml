@@ -3,8 +3,8 @@ kind: Pod
 metadata:
   name: nodulfront-pod
   labels:
-    app: nodulapp
-    component: nodulfront
+    app.kubernetes.io/name: nodulapp
+    app.kubernetes.io/component: nodulfront
 spec:
   containers:
     - name: nodulfront

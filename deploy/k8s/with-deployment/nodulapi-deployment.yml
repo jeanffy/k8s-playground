@@ -3,18 +3,18 @@ kind: Deployment
 metadata:
   name: nodulapi-deployment
   labels:
-    app: nodulapp
-    component: nodulapi
+    app.kubernetes.io/name: nodulapp
+    app.kubernetes.io/component: nodulapi
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: nodulapi
+      app.kubernetes.io/component: nodulapi
   template:
     metadata:
       labels:
-        app: nodulapp
-        component: nodulapi
+        app.kubernetes.io/name: nodulapp
+        app.kubernetes.io/component: nodulapi
     spec:
       volumes:
         - name: file-storage
