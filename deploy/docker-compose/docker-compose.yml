@@ -9,17 +9,25 @@ services:
     volumes:
       - ../../data/file:/tmp/nodulapp
     environment:
-      NODUL_USE_REDIS: 1
+      # NODUL_USE_REDIS: 1
+      NODUL_USE_MONGO: 1
       NODUL_FOO: This is a message from docker compose
-      NODUL_REDIS_HOST: redis
+      NODUL_REDIS_HOST: nodulredis
+      NODUL_MONGO_HOST: nodulmongo
     depends_on:
       - redis
 
-  redis:
-    image: redis:6-alpine
-    container_name: redis
+  # redis:
+  #   image: redis:6-alpine
+  #   container_name: nodulredis
+  #   volumes:
+  #     - ../../data/redis:/data
+
+  mongodb:
+    image: mongo:4.4.6
+    container_name: nodulmongo
     volumes:
-      - ../../data/redis:/data
+      - ../../data/mongodb:/data/db
 
   nodulfront:
     build:

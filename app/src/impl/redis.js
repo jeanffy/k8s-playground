@@ -28,6 +28,10 @@ function init() {
   });
 }
 
+function close() {
+  console.log(`Disconnecting from Redis`);
+}
+
 async function getAllValues(client) {
   const keys = await redisKeysPromise(client, '*');
   const values = [];
@@ -44,6 +48,7 @@ async function addValue(client, key, value) {
 
 module.exports = {
   init: init,
+  close: close,
   getAllValues: getAllValues,
   addValue: addValue
 }

@@ -2,4 +2,6 @@ data/file/*
 !data/file/.gitkeep
 data/redis/*
 !data/redis/.gitkeep
+data/mongodb/*
+!data/mongodb/.gitkeep
 app/node_modules

@@ -9,7 +9,9 @@ spec:
   volumes:
     - name: file-storage
       emptyDir: {}
-    - name: redis-storage
+    # - name: redis-storage
+    #   emptyDir: {}
+    - name: mongo-storage
       emptyDir: {}
 
   containers:
@@ -23,9 +25,13 @@ spec:
           value: "5959"
         - name: NODUL_FOO
           value: This is a message from k8s
-        - name: NODUL_USE_REDIS
+        # - name: NODUL_USE_REDIS
+        #   value: "1"
+        # - name: NODUL_REDIS_HOST
+        #   value: 127.0.0.1
+        - name: NODUL_USE_MONGO
           value: "1"
-        - name: NODUL_REDIS_HOST
+        - name: NODUL_MONGO_HOST
           value: 127.0.0.1
       ports:
         - containerPort: 5959
@@ -33,8 +39,14 @@ spec:
         - name: file-storage
           mountPath: /tmp/nodulapp
 
-    - name: redis
-      image: redis:6-alpine
+    # - name: nodulredis
+    #   image: redis:6-alpine
+    #   volumeMounts:
+    #     - name: redis-storage
+    #       mountPath: /data
+
+    - name: nodulmongo
+      image: mongo:4.4.6
       volumeMounts:
-        - name: redis-storage
-          mountPath: /data
+        - name: mongo-storage
+          mountPath: /data/db

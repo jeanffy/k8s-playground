@@ -26,10 +26,14 @@ spec:
           env:
             - name: NODUL_FOO
               value: This is a message from k8s
-            - name: NODUL_USE_REDIS
+            # - name: NODUL_USE_REDIS
+            #   value: "1"
+            # - name: NODUL_REDIS_HOST
+            #   value: redis-clusterip
+            - name: NODUL_USE_MONGO
               value: "1"
-            - name: NODUL_REDIS_HOST
-              value: redis-clusterip
+            - name: NODUL_MONGO_HOST
+              value: mongo-clusterip
           ports:
             - containerPort: 5959
           volumeMounts:

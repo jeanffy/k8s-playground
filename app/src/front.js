@@ -1,4 +1,5 @@
 const http = require('http');
+const os = require('os');
 
 const version = '1.0';
 
@@ -27,6 +28,7 @@ const server = http.createServer(async (req, res) => {
     </head>
     <body>
       <h2>Nodul Front version ${version}</h2>
+      <p>Hostname = ${os.hostname()}</p>
       <p>API URL ${url}</p>
       <p>Response from API:</p>
       <pre>Request in progress...</pre>

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+  labels:
+    app: nodulapp
+    component: mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mongo
+  template:
+    metadata:
+      labels:
+        app: nodulapp
+        component: mongo
+    spec:
+      volumes:
+        - name: mongo-storage
+          persistentVolumeClaim:
+            claimName: mongo-pvc
+      containers:
+        - name: mongo
+          image: mongo:4.4.6
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongo-storage
+              mountPath: /data/db

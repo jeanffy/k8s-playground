@@ -9,6 +9,10 @@ function init() {
   return folderPath;
 }
 
+function close() {
+  console.log(`Disconnecting from folder`);
+}
+
 function getList(folderPath) {
   return fs.readdirSync(folderPath);
 }
@@ -21,6 +25,7 @@ function writeNew(folderPath, alea) {
 
 module.exports = {
   init: init,
+  close: close,
   getList: getList,
   writeNew: writeNew
 }
