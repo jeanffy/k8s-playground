@@ -3,8 +3,10 @@ kind: Pod
 metadata:
   name: nodulapi-pod
   labels:
-    app.kubernetes.io/name: nodulapp
-    app.kubernetes.io/component: nodulapi
+    label.app: nodulapp
+    label.component: nodulapi
+    label.object: nodulapi-pod
+
 spec:
   volumes:
     - name: file-storage

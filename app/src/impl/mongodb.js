@@ -20,13 +20,13 @@ async function close(client) {
   await client.close();
 }
 
-async function getAllValues(client) {
+async function getAllDocuments(client) {
   const db = client.db('nodulapp');
   const collection = db.collection('nodulapp');
   const docs = await collection.find('{}').toArray();
   const values = [];
   for (const doc of docs) {
-    values.push(`{ value: ${doc.value} }`);
+    values.push({ value: doc.value });
   }
   return values;
 }
@@ -40,6 +40,6 @@ async function addValue(client, value) {
 module.exports = {
   init: init,
   close: close,
-  getAllValues: getAllValues,
+  getAllDocuments: getAllDocuments,
   addValue: addValue
 }

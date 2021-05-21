@@ -3,8 +3,9 @@ kind: Service
 metadata:
   name: nodulapi-nodeport
   labels:
-    app.kubernetes.io/name: nodulapp
-    app.kubernetes.io/component: nodulapi
+    label.app: nodulapp
+    label.component: nodulapi
+    label.object: nodulapi-nodeport
 spec:
   type: NodePort
   ports:
@@ -13,4 +14,4 @@ spec:
       targetPort: 5959
       nodePort: 31111
   selector:
-    app.kubernetes.io/component: nodulapi
+    label.object: nodulapi-pod

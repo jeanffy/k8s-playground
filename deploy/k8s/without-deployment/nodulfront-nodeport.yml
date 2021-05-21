@@ -3,8 +3,9 @@ kind: Service
 metadata:
   name: nodulfront-nodeport
   labels:
-    app.kubernetes.io/name: nodulapp
-    app.kubernetes.io/component: nodulfront
+    label.app: nodulapp
+    label.component: nodulfront
+    label.object: nodulfront-nodeport
 spec:
   type: NodePort
   ports:
@@ -13,4 +14,4 @@ spec:
       targetPort: 7474
       nodePort: 32222
   selector:
-    app.kubernetes.io/component: nodulfront
+    label.object: nodulfront-pod

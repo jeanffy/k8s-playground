@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: redis-clusterip
   labels:
-    app.kubernetes.io/name: nodulapp
-    app.kubernetes.io/component: redis
+    label.app: nodulapp
+    label.component: redis
 spec:
   type: ClusterIP
   selector:
-    app.kubernetes.io/component: redis
+    label.object: redis-pod
   ports:
     - port: 6379
       targetPort: 6379

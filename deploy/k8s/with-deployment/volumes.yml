@@ -3,8 +3,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: nodulapi-pvc
   labels:
-    app.kubernetes.io/name: nodulapp
-    app.kubernetes.io/component: nodulapi
+    label.app: nodulapp
+    label.component: nodulapi
+    label.object: nodulapi-pvc
 spec:
   accessModes:
     - ReadWriteOnce
@@ -17,8 +18,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: redis-pvc
   labels:
-    app.kubernetes.io/name: nodulapp
-    app.kubernetes.io/component: redis
+    label.app: nodulapp
+    label.component: redis
+    label.object: redis-pvc
 spec:
   accessModes:
     - ReadWriteOnce
@@ -31,8 +33,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: mongo-pvc
   labels:
-    app.kubernetes.io/name: nodulapp
-    app.kubernetes.io/component: mongo
+    label.app: nodulapp
+    label.component: mongo
+    label.object: mongo-pvc
 spec:
   accessModes:
     - ReadWriteOnce

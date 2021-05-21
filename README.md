@@ -135,7 +135,7 @@ Démarrer minikube :
 
 ### Pod + NodePort
 
-Juste pour le fun, ne pas faire en prod. les deux containers sont regroupés dans 1 seul pod.
+Juste pour le fun, ne pas faire en prod. On regroupe les containers API et MongoDB dans 1 seul pod.
 
 Schéma :
 
@@ -173,9 +173,9 @@ Schéma :
 ![](./deploy/schemas/k8s-deployment.png)
 
 - `kubectl apply -f deploy/k8s/with-deployment`
-- `kubectl get all -l app.kubernetes.io/name=nodulapp` pour voir tous les objets créés (sauf les PVC et Ingress)
-- `kubectl get pvc -l app.kubernetes.io/name=nodulapp` pour voir les PVC
-- `kubectl get ingresses -l app.kubernetes.io/name=nodulapp` pour voir les PVC
+- `kubectl get all -l label.app=nodulapp` pour voir tous les objets créés (sauf les PVC et Ingress)
+- `kubectl get pvc -l label.app=nodulapp` pour voir les PVC
+- `kubectl get ingresses -l label.app=nodulapp` pour voir les PVC
 - si minikube avec driver Docker
   - `minikube service nodulapi-clusterip` (spécifique minikube)
   - le navigateur s'ouvre sur l'URL affichée
@@ -183,7 +183,7 @@ Schéma :
   - `minikube ip`
   - API : http://<minikube-ip>/api
   - Front http://<minikube-ip>
-- `kubectl get pods -l app.kubernetes.io/name=nodulapp` pour voir les pods créés
+- `kubectl get pods -l label.app=nodulapp` pour voir les pods créés
 - `kubectl logs -f nodulapi-deployment-xxx-yyy` pour voir les logs de l'app Node.js API
 - `kubectl logs -f nodulmongo-deployment-xxx-yyy` pour voir les logs de MongoDB
 - `kubectl logs -f nodulfront-deployment-xxx-yyy` pour voir les logs de l'app Node.js front
@@ -208,9 +208,9 @@ Pour tout supprimer :
 
 - `kubectl delete -f deploy/k8s/with-deployment`
 - ou
-  - `kubectl delete all -l app.kubernetes.io/name=nodulapp`
-  - `kubectl delete pvc -l app.kubernetes.io/name=nodulapp` (les fichiers crées et les données de MongoDB seront perdues)
-  - `kubectl delete ingress -l app.kubernetes.io/name=nodulapp`
+  - `kubectl delete all -l label.app=nodulapp`
+  - `kubectl delete pvc -l label.app=nodulapp` (les fichiers crées et les données de MongoDB seront perdues)
+  - `kubectl delete ingress -l label.app=nodulapp`
 
 Debugger un pod qui ne démarre pas :
 
@@ -220,7 +220,10 @@ Debugger un pod qui ne démarre pas :
 
 ### Resources
 
+Tout supprimer (**ATTENTION** reset du cluster) : `kubectl delete all --all && kubectl delete pvc --all && kubectl delete ingresses --all`
+
 - Kubernetes
+  - https://kubernetes.io/fr/docs/home/
   - https://kubernetes.io/docs/reference
   - YAML spec : https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21
   - https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ports-targetport-nodeport-service.html

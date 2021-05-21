@@ -3,18 +3,20 @@ kind: Deployment
 metadata:
   name: redis-deployment
   labels:
-    app.kubernetes.io/name: nodulapp
-    app.kubernetes.io/component: redis
+    label.app: nodulapp
+    label.component: redis
+    label.object: redis-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/component: redis
+      label.object: redis-pod
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: nodulapp
-        app.kubernetes.io/component: redis
+        label.app: nodulapp
+        label.component: redis
+        label.object: redis-pod
     spec:
       volumes:
         - name: redis-storage

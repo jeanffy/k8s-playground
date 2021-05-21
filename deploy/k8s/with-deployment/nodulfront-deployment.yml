@@ -3,18 +3,20 @@ kind: Deployment
 metadata:
   name: nodulfront-deployment
   labels:
-    app.kubernetes.io/name: nodulapp
-    app.kubernetes.io/component: nodulfront
+    label.app: nodulapp
+    label.component: nodulfront
+    label.object: nodulfront-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/component: nodulfront
+      label.object: nodulfront-pod
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: nodulapp
-        app.kubernetes.io/component: nodulfront
+        label.app: nodulapp
+        label.component: nodulfront
+        label.object: nodulfront-pod
     spec:
       containers:
         - name: nodulfront

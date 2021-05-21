@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: mongo-clusterip
   labels:
-    app.kubernetes.io/name: nodulapp
-    app.kubernetes.io/component: mongo
+    label.app: nodulapp
+    label.component: mongo
 spec:
   type: ClusterIP
   selector:
-    app.kubernetes.io/component: mongo
+    label.object: mongo-pod
   ports:
     - port: 27017
       targetPort: 27017

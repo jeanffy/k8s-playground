@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: nodulapi-clusterip
   labels:
-    app.kubernetes.io/name: nodulapp
-    app.kubernetes.io/component: nodulapi
+    label.app: nodulapp
+    label.component: nodulapi
 spec:
   type: ClusterIP
   selector:
-    app.kubernetes.io/component: nodulapi
+    label.object: nodulapi-pod
   ports:
     - port: 6363
       targetPort: 3000

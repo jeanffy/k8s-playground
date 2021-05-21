@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: nodulfront-clusterip
   labels:
-    app.kubernetes.io/name: nodulapp
-    app.kubernetes.io/component: nodulfront
+    label.app: nodulapp
+    label.component: nodulfront
 spec:
   type: ClusterIP
   selector:
-    app.kubernetes.io/component: nodulfront
+    label.object: nodulfront-pod
   ports:
     - port: 7171
       targetPort: 4000

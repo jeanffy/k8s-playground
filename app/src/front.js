@@ -28,8 +28,10 @@ const server = http.createServer(async (req, res) => {
     </head>
     <body>
       <h2>Nodul Front version ${version}</h2>
-      <p>Hostname = ${os.hostname()}</p>
-      <p>API URL ${url}</p>
+      <table>
+        <tr><td>Hostname</td><td>${os.hostname()}</td></tr>
+        <tr><td>API URL</td><td>${url}</td></tr>
+      </table>
       <p>Response from API:</p>
       <pre>Request in progress...</pre>
       <script>callApi();</script>

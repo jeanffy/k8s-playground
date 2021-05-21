@@ -3,18 +3,20 @@ kind: Deployment
 metadata:
   name: mongo-deployment
   labels:
-    app.kubernetes.io/name: nodulapp
-    app.kubernetes.io/component: mongo
+    label.app: nodulapp
+    label.component: mongo
+    label.object: mongo-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/component: mongo
+      label.object: mongo-pod
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: nodulapp
-        app.kubernetes.io/component: mongo
+        label.app: nodulapp
+        label.component: mongo
+        label.object: mongo-pod
     spec:
       volumes:
         - name: mongo-storage
